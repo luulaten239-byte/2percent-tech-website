@@ -6,7 +6,7 @@
     <title>2%Tech Website Redesign Concept</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
     <style>
       :root {
         --ink: #101113;
@@ -15,12 +15,12 @@
         --paper: #f4f0e7;
         --paper-2: #fffaf0;
         --white: #ffffff;
-        --yellow: #f8c800;
-        --yellow-2: #ffb900;
+        --yellow: #F1BB01;
+        --yellow-2: #F1BB01;
         --line: rgba(16, 17, 19, 0.13);
         --soft: rgba(255, 255, 255, 0.72);
         --muted: #6f6c63;
-        --font-display-en: "Bebas Neue", "Oswald", "Avenir Next Condensed", "DIN Condensed", "Arial Narrow", sans-serif;
+        --font-display-en: "Oswald", "Avenir Next Condensed", "DIN Condensed", "Arial Narrow", sans-serif;
         --font-nav-en: "Oswald", "Rajdhani", "Avenir Next Condensed", "DIN Condensed", "Arial Narrow", sans-serif;
         --font-body-en: "Oswald", "Avenir Next Condensed", "Helvetica Neue", Arial, sans-serif;
         --font-display-zh: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
@@ -35,13 +35,14 @@
       body {
         margin: 0;
         font-family: var(--font-body-en);
+        font-weight: 300;
         color: var(--ink);
         background: var(--paper);
         overflow-x: hidden;
       }
 
       body.zh [data-en],
-      body:not(.zh) [data-zh] { display: none; }
+      body:not(.zh) [data-zh] { display: none !important; }
 
       body.zh {
         font-family: var(--font-body-zh);
@@ -50,6 +51,25 @@
       a { color: inherit; text-decoration: none; }
       img { display: block; max-width: 100%; }
       button { font: inherit; }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      .section-title h2,
+      .intro-title,
+      .intro-subtitle,
+      .hero-title,
+      .hero-copy,
+      .detail-lede,
+      .sponsor-card h2,
+      .sponsor-card p {
+        font-family: var(--font-body-en);
+        font-weight: 300;
+      }
 
       .page {
         position: relative;
@@ -158,9 +178,25 @@
         object-fit: cover;
         object-position: 54% 38%;
         filter: grayscale(.48) sepia(.22) hue-rotate(350deg) contrast(1.08) saturate(.72) brightness(.5);
-        opacity: .34;
-        transform: translate(-5%, 5%) scale(1.32);
-        animation: nebulaBaseIn 1.2s ease 0s forwards, realSkyDrift 9s ease forwards;
+        opacity: .22;
+        transform: translate(-5%, 5%) scale(1.24);
+        animation: none;
+      }
+
+      .intro-black-hole {
+        position: absolute;
+        inset: 0;
+        z-index: 12;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        opacity: 0;
+        mix-blend-mode: normal;
+        filter: saturate(1.08) contrast(1.12) brightness(.74);
+        transform: scale(1.035);
+        animation: blackHolePrelude 2.85s cubic-bezier(.22,.78,.18,1) forwards;
+        pointer-events: none;
       }
 
       .intro-startrail-video {
@@ -170,10 +206,10 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        opacity: .12;
+        opacity: 0;
         mix-blend-mode: screen;
         filter: grayscale(.35) sepia(.26) hue-rotate(348deg) contrast(1.18) saturate(.78) brightness(.88);
-        animation: starTrailVideoIn 1.1s ease 0s forwards;
+        animation: starTrailVideoIn 1.25s ease 1.68s forwards;
         pointer-events: none;
       }
 
@@ -197,11 +233,11 @@
         z-index: 5;
         pointer-events: none;
         background:
-          linear-gradient(90deg, rgba(5,6,9,.56) 0%, rgba(14,15,18,.28) 48%, rgba(248,200,0,.08) 100%),
-          radial-gradient(circle at 50% 52%, rgba(248,200,0,.08), transparent 24rem),
-          linear-gradient(180deg, rgba(0,0,0,.2), rgba(0,0,0,.52));
-        mix-blend-mode: color;
-        opacity: .74;
+          linear-gradient(90deg, rgba(5,6,9,.5) 0%, rgba(14,15,18,.22) 48%, rgba(248,200,0,.08) 100%),
+          radial-gradient(circle at 50% 52%, rgba(248,200,0,.1), transparent 24rem),
+          linear-gradient(180deg, rgba(0,0,0,.14), rgba(0,0,0,.42));
+        mix-blend-mode: normal;
+        opacity: .62;
       }
 
       .mountain-meteor-scene,
@@ -260,8 +296,10 @@
           url("assets/intro-event-photo.jpg") center / cover no-repeat;
         transform: scale(1.06);
         filter: blur(4px) grayscale(.22) sepia(.16) hue-rotate(350deg) saturate(.82) contrast(1);
-        opacity: .42;
-        animation: introPhotoReveal 2.4s ease 0s forwards, introPhotoPush 8s ease forwards;
+        opacity: 0;
+        transform: scale(1.045);
+        filter: blur(8px) grayscale(.18) sepia(.12) hue-rotate(350deg) saturate(.9) contrast(1.04) brightness(.82);
+        animation: introPhotoReveal 1.35s cubic-bezier(.2,.8,.2,1) 1.74s forwards;
       }
 
       .intro-sequence.is-dismissed {
@@ -415,10 +453,15 @@
         content: "";
         position: absolute;
         inset: 0;
-        z-index: 4;
+        z-index: 11;
         pointer-events: none;
-        background: linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.72));
-        opacity: 1;
+        background:
+          radial-gradient(circle at 50% 48%, rgba(255,255,255,.95) 0 4%, rgba(241,187,1,.38) 10%, rgba(241,187,1,.16) 23%, transparent 48%),
+          radial-gradient(circle at 50% 54%, rgba(4,7,14,.0), rgba(4,7,14,.62) 68%, rgba(0,0,0,.9) 100%);
+        opacity: 0;
+        filter: blur(10px);
+        mix-blend-mode: screen;
+        animation: introBloomBridge 1.65s cubic-bezier(.2,.8,.2,1) 1.42s forwards;
       }
 
       .intro-logo-wrap {
@@ -428,15 +471,15 @@
         max-width: 92vw;
         display: grid;
         place-items: center;
-        opacity: 0;
+        opacity: 1;
         overflow: visible;
-        clip-path: inset(0 50% 0 50%);
-        filter: blur(22px);
+        clip-path: none;
+        filter: none;
         background: transparent !important;
         box-shadow: none !important;
         mix-blend-mode: normal;
         isolation: isolate;
-        animation: introNameReveal 1.95s cubic-bezier(.16,1,.25,1) 2.05s forwards;
+        animation: none;
       }
 
       .intro-title {
@@ -468,7 +511,7 @@
         text-shadow: none !important;
         filter: none !important;
         opacity: .96;
-        animation: titleLightSweep 2.4s ease 3.25s forwards;
+        animation: none;
       }
 
       .intro-title strong {
@@ -492,9 +535,9 @@
         display: flex;
         gap: 14px;
         justify-content: center;
-        opacity: 0;
-        transform: translateY(14px);
-        animation: introActionsReveal .72s var(--ease) 3.9s forwards;
+        opacity: 1;
+        transform: none;
+        animation: none;
       }
 
       .intro-enter,
@@ -543,9 +586,9 @@
         line-height: 1.55;
         text-align: center;
         text-shadow: 0 0 20px rgba(0,0,0,.42);
-        opacity: 0;
-        transform: translateY(12px);
-        animation: introActionsReveal .72s var(--ease) 4.18s forwards;
+        opacity: 1;
+        transform: none;
+        animation: none;
       }
 
       .nav-links {
@@ -556,7 +599,7 @@
         gap: clamp(16px, 1.65vw, 30px);
         font-family: var(--font-nav-en);
         font-size: clamp(18px, 1.32vw, 27px);
-        font-weight: 700;
+        font-weight: 300;
         letter-spacing: .015em;
         text-transform: uppercase;
         color: rgba(255,255,255,.62);
@@ -609,7 +652,7 @@
         cursor: pointer;
         font-family: var(--font-nav-en);
         font-size: 17px;
-        font-weight: 900;
+        font-weight: 300;
         letter-spacing: .04em;
         text-transform: uppercase;
       }
@@ -791,23 +834,35 @@
 
       .detail-list {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
         gap: clamp(14px, 2vw, 24px);
         margin-top: clamp(22px, 3vw, 38px);
+        min-width: 0;
       }
 
       .detail-pill {
         position: relative;
         overflow: hidden;
+        min-width: 0;
         padding: 18px 20px;
         border: 1px solid rgba(248,200,0,.22);
         background:
           linear-gradient(135deg, rgba(255,213,26,.14), rgba(255,255,255,.04)),
           rgba(255,255,255,.055);
         font-family: var(--font-nav-en);
-        font-weight: 800;
+        font-weight: 300;
+        font-size: clamp(15px, 1.15vw, 20px);
+        line-height: 1.24;
         text-transform: uppercase;
         color: rgba(255,255,255,.86);
+        overflow-wrap: anywhere;
+        word-break: break-word;
+      }
+
+      .detail-pill.is-email {
+        text-transform: none;
+        font-size: clamp(13px, 1vw, 18px);
+        letter-spacing: 0;
       }
 
       .detail-pill::after {
@@ -1405,7 +1460,7 @@
         background:
           linear-gradient(90deg, rgba(0,0,0,.5), rgba(0,0,0,.08) 58%, rgba(0,0,0,.54)),
           linear-gradient(180deg, rgba(0,0,0,.16), rgba(0,0,0,.58)),
-          url("assets/nav-backgrounds/mountain-meteor.jpg") center / cover no-repeat;
+          url("assets/nav-backgrounds/alpine-torch-cinematic.jpg") center 48% / cover no-repeat;
       }
 
       .section.page-view::before {
@@ -1475,12 +1530,12 @@
 
       .services.page-view {
         background:
-          url("assets/nav-backgrounds/blue-mountain-stars.jpg") center 46% / cover no-repeat;
+          url("assets/nav-backgrounds/adventures-aurora-stars.jpg") center 46% / cover no-repeat;
       }
 
       .story.page-view {
         background:
-          url("assets/nav-backgrounds/milkyway-fjord-blue.jpg") center 42% / cover no-repeat;
+          url("assets/nav-backgrounds/story-milkyway-fjord.jpg") center 44% / cover no-repeat;
       }
 
       .audience.page-view {
@@ -1492,8 +1547,8 @@
 
       .gallery.page-view {
         background:
-          url("assets/nav-backgrounds/mountain-startrail.jpg") center / cover no-repeat;
-        background-position: 50% 42%;
+          url("assets/nav-backgrounds/campfire-milkyway.jpg") center / cover no-repeat;
+        background-position: 50% 38%;
         background-size: cover;
       }
 
@@ -1505,7 +1560,7 @@
 
       .sponsor.page-view {
         background:
-          url("assets/nav-backgrounds/saturn-gold-dark.jpg") center 45% / cover no-repeat;
+          url("assets/nav-backgrounds/alpine-torch-cinematic.jpg") center 54% / cover no-repeat;
       }
 
       .section::after {
@@ -1663,50 +1718,51 @@
       .service-grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0,1fr));
-        gap: 14px;
+        gap: 1px;
+        border: 1px solid rgba(241,187,1,.28);
+        background:
+          linear-gradient(135deg, rgba(241,187,1,.24), rgba(255,255,255,.12));
+        backdrop-filter: blur(14px);
       }
 
       .service-card {
         position: relative;
-        min-height: 218px;
-        padding: 28px;
-        border-radius: 24px;
+        min-height: 206px;
+        padding: clamp(22px, 2.8vw, 36px);
+        border-radius: 0;
         overflow: hidden;
         color: #fff;
         background:
-          radial-gradient(circle at 18% 78%, rgba(255,255,255,.10), transparent 7rem),
-          radial-gradient(circle at 86% 8%, rgba(255,213,26,.28), transparent 10rem),
-          linear-gradient(135deg, #222832 0%, #111217 62%, #07080b 100%);
-        box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 22px 55px rgba(0,0,0,.16);
+          linear-gradient(135deg, rgba(22,24,30,.76), rgba(13,15,20,.72)),
+          radial-gradient(circle at 96% 0%, rgba(241,187,1,.18), transparent 13rem);
+        box-shadow: none;
       }
 
       .service-card::before {
         content: "";
         position: absolute;
-        inset: 0;
-        opacity: .24;
-        background:
-          linear-gradient(112deg, transparent 0 28%, rgba(255,213,26,.42) 28.2% 28.6%, transparent 28.8% 100%),
-          radial-gradient(circle at 18% 22%, rgba(255,255,255,.75) 0 1.5px, transparent 2px),
-          radial-gradient(circle at 78% 74%, rgba(255,213,26,.8) 0 2px, transparent 2.5px),
-          radial-gradient(circle at 54% 38%, rgba(255,255,255,.5) 0 1px, transparent 1.5px);
+        left: clamp(18px, 2vw, 28px);
+        top: clamp(18px, 2vw, 28px);
+        width: 38px;
+        height: 3px;
+        opacity: 1;
+        background: var(--yellow);
         pointer-events: none;
-        animation: cardGlowDrift 8s ease-in-out infinite alternate;
       }
 
       .service-card::after {
         content: "";
         position: absolute;
-        inset: -20%;
+        right: -20%;
+        top: -40%;
+        width: 42%;
+        aspect-ratio: 1;
         pointer-events: none;
-        opacity: .24;
+        opacity: .2;
         background:
-          radial-gradient(ellipse at 18% 24%, rgba(255,255,255,.18), transparent 18rem),
-          radial-gradient(ellipse at 78% 58%, rgba(255,213,26,.18), transparent 14rem);
+          radial-gradient(circle, rgba(241,187,1,.52), transparent 62%);
         mix-blend-mode: screen;
-        filter: blur(10px);
-        transform: translate3d(-4%, -2%, 0);
-        animation: cardNebulaFlow 10s ease-in-out infinite alternate;
+        filter: blur(18px);
       }
 
       .service-card .card-orbit::after {
@@ -1724,20 +1780,7 @@
       }
 
       .card-orbit {
-        position: absolute;
-        right: -24px;
-        top: -26px;
-        width: 220px;
-        aspect-ratio: 1;
-        border-radius: 50%;
-        pointer-events: none;
-        opacity: .72;
-        background:
-          radial-gradient(circle at 50% 50%, rgba(255,213,26,.24), transparent 22%),
-          radial-gradient(circle at 50% 50%, transparent 0 35%, rgba(255,255,255,.18) 35.4% 35.9%, transparent 36.3% 54%, rgba(248,200,0,.28) 54.3% 54.9%, transparent 55.3%);
-        transform: rotate(-18deg);
-        filter: drop-shadow(0 0 18px rgba(255,213,26,.18));
-        animation: cardOrbitFloat 9s ease-in-out infinite alternate;
+        display: none;
       }
 
       .card-orbit::before {
@@ -1753,18 +1796,21 @@
       }
 
       .service-card:nth-child(2),
-      .service-card:nth-child(4) { transform: translateY(18px); }
+      .service-card:nth-child(4) { transform: none; }
 
       .service-card small {
         color: var(--yellow);
-        font-weight: 900;
-        letter-spacing: .08em;
+        font-weight: 300;
+        letter-spacing: .11em;
+        text-shadow: 0 0 18px rgba(241,187,1,.34);
       }
 
       .service-card h3 {
-        margin: 44px 0 0;
-        font-size: 22px;
-        line-height: 1.14;
+        margin: 56px 0 0;
+        font-size: clamp(24px, 2.1vw, 36px);
+        line-height: 1.08;
+        color: #fff;
+        text-wrap: balance;
       }
 
       body.zh .service-card h3 {
@@ -1774,8 +1820,10 @@
 
       .service-card p {
         margin: 14px 0 0;
-        color: rgba(255,255,255,.66);
-        line-height: 1.55;
+        max-width: 560px;
+        color: rgba(255,255,255,.82);
+        line-height: 1.62;
+        text-wrap: pretty;
       }
 
       .audience {
@@ -1835,21 +1883,23 @@
 
       .audience-map {
         position: relative;
-        min-height: clamp(620px, 48vw, 720px);
-        max-width: 1240px;
+        min-height: auto;
+        max-width: 1320px;
         margin: 0 auto;
-        padding: clamp(26px, 4vw, 56px);
+        padding: clamp(18px, 2.6vw, 34px);
         border-radius: 0;
-        overflow: hidden;
+        overflow: visible;
         display: grid;
-        grid-template-columns: minmax(420px, .9fr) minmax(360px, .78fr);
-        gap: clamp(28px, 4vw, 60px);
-        align-items: center;
+        grid-template-columns: minmax(440px, .95fr) minmax(420px, 1.05fr);
+        gap: clamp(20px, 2.4vw, 34px);
+        align-items: stretch;
         background:
-          radial-gradient(circle at 28% 50%, rgba(248,200,0,.22), transparent 17rem),
-          radial-gradient(circle at 76% 26%, rgba(255,255,255,.08), transparent 18rem),
-          linear-gradient(135deg, rgba(8,10,15,.9), rgba(3,5,9,.96));
-        border: 1px solid rgba(255,255,255,.1);
+          radial-gradient(circle at 18% 24%, rgba(241,187,1,.16), transparent 18rem),
+          linear-gradient(135deg, rgba(255,255,255,.075), rgba(255,255,255,.026));
+        border: 1px solid rgba(241,187,1,.22);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 28px 88px rgba(0,0,0,.2);
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
       }
 
       .audience-map::after {
@@ -1949,6 +1999,379 @@
         background: transparent;
         border: 0;
         box-shadow: none;
+      }
+
+      .room-board {
+        position: relative;
+        z-index: 4;
+        display: grid;
+        gap: 14px;
+        align-self: stretch;
+        align-content: center;
+      }
+
+      .room-blueprint {
+        position: relative;
+        z-index: 4;
+        align-self: stretch;
+        min-height: auto;
+        padding: clamp(18px, 2.4vw, 30px);
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        gap: clamp(14px, 1.5vw, 22px);
+        background:
+          radial-gradient(circle at 22% 18%, rgba(241,187,1,.16), transparent 14rem),
+          linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.028));
+        border: 1px solid rgba(255,255,255,.14);
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,.035);
+      }
+
+      .room-blueprint::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: .22;
+        background-image:
+          linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px);
+        background-size: 44px 44px;
+        mask-image: linear-gradient(180deg, #000, transparent 92%);
+      }
+
+      .room-blueprint small,
+      .room-step small,
+      .room-path small {
+        display: block;
+        color: var(--yellow);
+        font-size: 12px;
+        font-weight: 300;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+      }
+
+      .room-blueprint h3 {
+        position: relative;
+        z-index: 1;
+        margin: 12px 0 0;
+        max-width: 620px;
+        color: #fff;
+        font-size: clamp(28px, 3vw, 48px);
+        line-height: 1.05;
+      }
+
+      .room-flow {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        align-content: center;
+      }
+
+      .room-step {
+        min-height: 142px;
+        padding: 18px;
+        display: grid;
+        align-content: space-between;
+        background: rgba(0,0,0,.34);
+        border: 1px solid rgba(255,255,255,.13);
+      }
+
+      .room-step b {
+        color: #fff;
+        font-size: clamp(22px, 2vw, 32px);
+        font-weight: 300;
+        line-height: 1.05;
+      }
+
+      .room-step p {
+        margin: 10px 0 0;
+        color: rgba(255,255,255,.64);
+        font-size: 13px;
+        line-height: 1.45;
+      }
+
+      .room-entry-list {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        gap: 9px;
+      }
+
+      .room-entry {
+        display: grid;
+        grid-template-columns: 118px 1fr;
+        gap: 14px;
+        padding: 12px 0;
+        border-top: 1px solid rgba(255,255,255,.13);
+      }
+
+      .room-entry b {
+        color: var(--yellow);
+        font-size: 15px;
+        font-weight: 300;
+      }
+
+      .room-entry span {
+        color: rgba(255,255,255,.7);
+        font-size: 14px;
+        line-height: 1.45;
+      }
+
+      .room-logo-wall {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+        gap: 8px;
+        align-content: center;
+      }
+
+      .room-logo {
+        min-height: 88px;
+        padding: 12px 14px;
+        display: grid;
+        grid-template-columns: 112px minmax(0, 1fr);
+        align-items: center;
+        gap: 16px;
+        color: #fff;
+        background:
+          linear-gradient(135deg, rgba(255,255,255,.16), rgba(255,255,255,.055));
+        border: 1px solid rgba(255,255,255,.16);
+        transition: transform .24s var(--ease), border-color .24s var(--ease), background .24s var(--ease);
+      }
+
+      .room-logo:nth-child(1) {
+        grid-column: auto;
+        grid-row: auto;
+        min-height: 94px;
+        background:
+          radial-gradient(circle at 16% 50%, rgba(241,187,1,.16), transparent 10rem),
+          linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.055));
+      }
+
+      .room-logo:hover {
+        transform: translateY(-3px);
+        border-color: rgba(241,187,1,.46);
+        background:
+          linear-gradient(135deg, rgba(241,187,1,.15), rgba(255,255,255,.075));
+      }
+
+      .room-logo-mark {
+        grid-row: 1;
+        width: 100%;
+        height: 86px;
+        display: grid;
+        place-items: center;
+        padding: 10px;
+        background: rgba(255,255,255,.94);
+        border: 1px solid rgba(255,255,255,.22);
+        overflow: visible;
+      }
+
+      .room-logo-mark img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        filter: none;
+        display: block;
+      }
+
+      .room-logo:nth-child(1) .room-logo-mark {
+        width: 100%;
+        height: 86px;
+      }
+
+      .room-logo-mark.is-dark {
+        background: rgba(255,255,255,.94);
+      }
+
+      .room-logo-mark.is-dark img {
+        filter: none;
+      }
+
+      .room-logo-mark.is-aws {
+        background: #111318;
+        border-color: rgba(241,187,1,.3);
+      }
+
+      .room-logo-mark.is-aws img {
+        filter: none;
+        transform: scale(.72);
+      }
+
+      .room-logo-mark.is-finch {
+        background: rgba(255,255,255,.9);
+      }
+
+      .room-logo-mark.is-finch img {
+        transform: scale(.72);
+      }
+
+      .room-logo b {
+        grid-column: 2;
+        grid-row: 1;
+        min-width: 0;
+        display: block;
+        margin-top: 0;
+        color: #fff;
+        font-size: clamp(21px, 1.8vw, 30px);
+        font-weight: 300;
+        line-height: 1.08;
+      }
+
+      .room-logo:nth-child(1) b {
+        font-size: clamp(21px, 1.8vw, 30px);
+        max-width: 360px;
+      }
+
+      .room-logo-role {
+        grid-column: 2;
+        grid-row: 2;
+        display: block;
+        min-width: 138px;
+        width: fit-content;
+        max-width: 100%;
+        padding: 8px 10px;
+        color: #0b0d12;
+        background: var(--yellow);
+        font-size: 12px;
+        line-height: 1.2;
+        text-align: left;
+        text-transform: uppercase;
+        overflow-wrap: anywhere;
+      }
+
+      .room-board-panel {
+        position: relative;
+        padding: clamp(20px, 2.4vw, 32px);
+        background:
+          linear-gradient(90deg, rgba(255,255,255,.12), rgba(255,255,255,.045)),
+          radial-gradient(circle at 96% 8%, rgba(241,187,1,.12), transparent 15rem);
+        border: 1px solid rgba(255,255,255,.16);
+        box-shadow: none;
+      }
+
+      .room-board-panel::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 58px;
+        height: 4px;
+        background: var(--yellow);
+      }
+
+      .room-board-panel small {
+        display: block;
+        color: var(--yellow);
+        font-family: var(--font-nav-en);
+        font-size: 12px;
+        font-weight: 300;
+        letter-spacing: .13em;
+        text-transform: uppercase;
+      }
+
+      .room-board-panel h3 {
+        margin: 18px 0 0;
+        max-width: 620px;
+        color: #fff;
+        font-size: clamp(30px, 3.1vw, 54px);
+        line-height: 1.04;
+      }
+
+      .room-board-panel p {
+        margin: 14px 0 0;
+        color: rgba(255,255,255,.72);
+        font-size: clamp(15px, 1vw, 18px);
+        line-height: 1.62;
+      }
+
+      .room-pill-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .room-pill-grid span {
+        display: inline-flex;
+        align-items: center;
+        min-height: 36px;
+        padding: 8px 12px;
+        color: #fff;
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.18);
+        font-size: 13px;
+        line-height: 1;
+      }
+
+      .room-pill-grid span.is-primary {
+        color: #090a0d;
+        background: var(--yellow);
+        border-color: var(--yellow);
+      }
+
+      .room-metrics {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1px;
+        background: rgba(255,255,255,.14);
+        border: 1px solid rgba(255,255,255,.14);
+      }
+
+      .room-metric {
+        min-height: 116px;
+        padding: 18px;
+        background: rgba(5, 6, 9, .82);
+      }
+
+      .room-metric b {
+        display: block;
+        color: var(--yellow);
+        font-size: clamp(28px, 3.4vw, 52px);
+        font-weight: 300;
+        line-height: .95;
+      }
+
+      .room-metric span {
+        display: block;
+        margin-top: 12px;
+        color: rgba(255,255,255,.68);
+        font-size: 13px;
+        line-height: 1.35;
+      }
+
+      .room-lanes {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1px;
+        background: rgba(255,255,255,.16);
+        border: 1px solid rgba(255,255,255,.16);
+      }
+
+      .room-lane {
+        min-height: 132px;
+        padding: 20px;
+        background: rgba(255,255,255,.075);
+        border: 0;
+      }
+
+      .room-lane b {
+        display: block;
+        color: #fff;
+        font-size: 18px;
+        font-weight: 300;
+      }
+
+      .room-lane span {
+        display: block;
+        margin-top: 7px;
+        color: rgba(255,255,255,.64);
+        font-size: 13px;
+        line-height: 1.45;
       }
 
       .single-planet-orbit,
@@ -2689,6 +3112,10 @@
         cursor: pointer;
       }
 
+      body:not(.admin-mode) .album-admin {
+        display: none !important;
+      }
+
       .album-feature {
         position: relative;
         min-height: clamp(360px, 42vw, 560px);
@@ -2952,8 +3379,8 @@
 
       .reveal {
         opacity: 0;
-        transform: translateY(26px);
-        transition: opacity .8s var(--ease), transform .8s var(--ease);
+        transform: translateY(18px);
+        transition: opacity .62s var(--ease), transform .62s var(--ease);
       }
 
       .reveal.in {
@@ -2961,9 +3388,9 @@
         transform: translateY(0);
       }
 
-      .reveal.delay-1 { transition-delay: .08s; }
-      .reveal.delay-2 { transition-delay: .16s; }
-      .reveal.delay-3 { transition-delay: .24s; }
+      .reveal.delay-1 { transition-delay: .05s; }
+      .reveal.delay-2 { transition-delay: .1s; }
+      .reveal.delay-3 { transition-delay: .15s; }
 
       @keyframes starDrift {
         from { transform: translate3d(0,0,0); }
@@ -3117,6 +3544,21 @@
       @keyframes introPhotoPush {
         0% { transform: scale(1.12); }
         100% { transform: scale(1.03); }
+      }
+
+      @keyframes blackHolePrelude {
+        0% { opacity: 1; transform: scale(1.045); filter: saturate(1.08) contrast(1.12) brightness(.66); }
+        46% { opacity: 1; transform: scale(1.018); filter: saturate(1.08) contrast(1.1) brightness(.78); }
+        68% { opacity: .92; transform: scale(1.01); filter: saturate(1.02) contrast(1.06) brightness(.72); }
+        86% { opacity: .28; transform: scale(1.005); filter: saturate(.96) contrast(1.02) brightness(.66) blur(1.5px); }
+        100% { opacity: 0; transform: scale(1); filter: saturate(.9) contrast(1) brightness(.56) blur(6px); }
+      }
+
+      @keyframes introBloomBridge {
+        0% { opacity: 0; transform: scale(.82); filter: blur(20px); }
+        28% { opacity: .78; transform: scale(1.02); filter: blur(12px); }
+        58% { opacity: .52; transform: scale(1.18); filter: blur(16px); }
+        100% { opacity: 0; transform: scale(1.42); filter: blur(28px); }
       }
 
       @keyframes mountainSceneOut {
@@ -3383,13 +3825,15 @@
 
       /* Final interaction polish: keep expanded backgrounds sharp, build a solar-system orbit, and make real playing-card decks. */
       .page-view.is-expanded .page-detail {
-        background: linear-gradient(145deg, rgba(7,8,12,.96), rgba(14,13,9,.92));
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
+        background:
+          linear-gradient(135deg, rgba(255,255,255,.09), rgba(255,255,255,.025)),
+          radial-gradient(circle at 14% 0%, rgba(241,187,1,.12), transparent 20rem);
+        backdrop-filter: blur(3px);
+        -webkit-backdrop-filter: blur(3px);
       }
 
       .page-view.is-expanded .page-detail::before {
-        content: none;
+        content: "";
       }
 
       .page-detail h3,
@@ -3805,8 +4249,26 @@
         .orbit-stage {
           min-height: 500px;
         }
-        .orbit-core .brand-logo {
-          width: min(76vw, 390px);
+        .room-board {
+          align-content: start;
+        }
+        .room-blueprint {
+          min-height: auto;
+        }
+        .room-lanes {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .room-logo-wall {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .room-logo,
+        .room-logo:nth-child(1),
+        .room-logo:nth-child(2),
+        .room-logo:nth-child(3),
+        .room-logo:nth-child(4) {
+          grid-column: auto;
+          grid-row: auto;
+          min-height: 150px;
         }
         .brand-card-stack {
           display: block;
@@ -3861,6 +4323,21 @@
         .nav-cta { display: none; }
         .hero { padding-top: 106px; }
         h1 { font-size: clamp(38px, 12vw, 56px); }
+        .page-intro {
+          min-height: calc(100dvh - 160px);
+          grid-template-columns: 1fr;
+          gap: 22px;
+          align-content: center;
+        }
+        .section.page-view .section-title h2,
+        .section.page-view .section-title p {
+          max-width: 100%;
+          overflow-wrap: anywhere;
+        }
+        .section.page-view .section-title p {
+          font-size: 18px;
+          line-height: 1.52;
+        }
         .proof-strip,
         .service-grid,
         .panel-meta,
@@ -3874,8 +4351,63 @@
           min-height: auto;
           padding: 20px;
         }
-        .orbit-stage {
-          min-height: 390px;
+        .room-blueprint {
+          min-height: auto;
+        }
+        .room-logo-wall,
+        .room-lanes {
+          grid-template-columns: 1fr;
+        }
+        .room-logo,
+        .room-logo:nth-child(1),
+        .room-logo:nth-child(2),
+        .room-logo:nth-child(3),
+        .room-logo:nth-child(4) {
+          grid-column: auto;
+          grid-row: auto;
+          min-height: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 12px;
+          padding: 16px;
+        }
+        .room-logo-mark,
+        .room-logo:nth-child(1) .room-logo-mark {
+          width: 100%;
+          height: 82px;
+          justify-self: auto;
+          overflow: visible;
+        }
+        .room-logo-mark img {
+          max-width: 100%;
+          max-height: 100%;
+          object-fit: contain;
+          transform: scale(.68);
+        }
+        .room-logo-mark.is-finch img {
+          transform: scale(.62);
+        }
+        .room-logo-mark.is-aws img {
+          width: 100%;
+          height: 100%;
+          transform: scale(.66);
+        }
+        .room-logo b,
+        .room-logo:nth-child(1) b {
+          max-width: 100%;
+          font-size: 24px;
+          line-height: 1.05;
+          margin-top: 4px;
+        }
+        .room-logo-role {
+          width: 100%;
+          min-width: 0;
+          text-align: center;
+        }
+        .room-entry {
+          grid-template-columns: 1fr;
+          gap: 6px;
         }
         .single-planet-orbit {
           display: none;
@@ -3917,6 +4449,11 @@
           gap: 8px;
         }
         .footer-inner { flex-direction: column; }
+      }
+
+      body.zh [data-en],
+      body:not(.zh) [data-zh] {
+        display: none !important;
       }
     </style>
   </head>
@@ -4002,6 +4539,9 @@
       </symbol>
     </svg>
     <div class="intro-sequence" id="introSequence">
+      <video class="intro-black-hole" autoplay muted playsinline preload="metadata">
+        <source src="https://svs.gsfc.nasa.gov/vis/a010000/a014600/a014619/1-Approaching_a_black_hole-4K.mp4" type="video/mp4" />
+      </video>
       <video class="intro-real-sky" autoplay muted loop playsinline preload="auto">
         <source src="assets/intro-sky-selected.mp4" type="video/mp4" />
       </video>
@@ -4052,11 +4592,10 @@
           <a href="#calendar" data-page-link="calendar"><span data-en>Latest Events</span><span data-zh>近期活动</span></a>
           <a href="#services" data-page-link="services"><span data-en>The Adventures</span><span data-zh>活动形式</span></a>
           <a href="#gallery" data-page-link="gallery"><span data-en>Gallery</span><span data-zh>图库合集</span></a>
-          <a href="#sponsor" data-page-link="sponsor"><span data-en>Interested?</span><span data-zh>合作咨询</span></a>
+          <a href="#sponsor" data-page-link="sponsor"><span data-en>Partner</span><span data-zh>合作咨询</span></a>
         </div>
         <div class="nav-actions">
           <button class="lang-toggle" type="button" id="langToggle">中 / EN</button>
-          <a class="nav-cta" href="#sponsor" data-page-link="sponsor"><span data-en>Partner With Us</span><span data-zh>洽谈合作</span></a>
         </div>
       </nav>
 
@@ -4087,7 +4626,7 @@
               </p>
               <div class="actions">
                 <a class="btn primary" href="#sponsor" data-page-link="sponsor"><span data-en>Request to host</span><span data-zh>提交活动申请</span></a>
-                <a class="btn" href="#services" data-page-link="services"><span data-en>What can we host?</span><span data-zh>查看活动形式</span></a>
+                <a class="btn" href="#services" data-page-link="services"><span data-en>Explore formats</span><span data-zh>查看活动形式</span></a>
               </div>
             </div>
 
@@ -4100,26 +4639,6 @@
               </div>
             </aside>
           </div>
-          <button class="page-down" type="button" data-expand-page="about" aria-label="Open about details" onclick="window.expandPageFallback && window.expandPageFallback(this); return false;"></button>
-          <div class="page-detail about-detail">
-            <div class="proof-strip reveal in">
-              <div class="proof-item"><b data-count="52">52+</b><span data-en>Rooms planned, promoted, and run since Jan 2025.</span><span data-zh>2025 年以来策划、传播并执行的活动现场。</span></div>
-              <div class="proof-item"><b data-count="150">150K+</b><span data-en>People reachable through our founder and builder channels.</span><span data-zh>通过创始人与开发者渠道可触达的人群。</span></div>
-              <div class="proof-item"><b data-code>SV</b><span data-en>Bay Area venue, community, and partner know-how.</span><span data-zh>湾区场地、社群与合作资源的本地经验。</span></div>
-              <div class="proof-item"><b data-range="3-5">3-5</b><span data-en>Events every month, with repeatable operations.</span><span data-zh>每月稳定活动节奏，以及可复用执行体系。</span></div>
-            </div>
-          </div>
-        </section>
-
-        <section class="section proof supporting-strip" aria-hidden="true">
-          <div class="inner">
-            <div class="proof-strip reveal">
-              <div class="proof-item"><b data-count="52">52+</b><span data-en>Rooms planned, promoted, and run since Jan 2025.</span><span data-zh>2025 年以来策划、传播并执行的活动现场。</span></div>
-              <div class="proof-item"><b data-count="150">150K+</b><span data-en>People reachable through our founder and builder channels.</span><span data-zh>通过创始人与开发者渠道可触达的人群。</span></div>
-              <div class="proof-item"><b data-code>SV</b><span data-en>Bay Area venue, community, and partner know-how.</span><span data-zh>湾区场地、社群与合作资源的本地经验。</span></div>
-              <div class="proof-item"><b data-range="3-5">3-5</b><span data-en>Events every month, with repeatable operations.</span><span data-zh>每月稳定活动节奏，以及可复用执行体系。</span></div>
-            </div>
-          </div>
         </section>
 
         <section class="section story page-view" id="story" data-page="story">
@@ -4128,8 +4647,8 @@
               <div class="kicker"><span data-en>Our Story</span><span data-zh>我们的故事</span></div>
               <h2><span data-en>We build the rooms where Bay Area builders meet.</span><span data-zh>我们搭建湾区 Builder 真正相遇的现场。</span></h2>
               <p>
-                <span data-en>2%Tech started from recurring founder rooms, technical workshops, sponsor nights, and community events. Since Jan 2025, the team has run 52+ events and built a 150K+ attendee network.</span>
-                <span data-zh>2%Tech 从持续举办的创始人局、技术工作坊、赞助商之夜和社区活动开始。自 2025 年 1 月以来，团队已执行 52+ 场活动，并沉淀 150K+ 到场者网络。</span>
+                <span data-en>2%Tech grew from recurring founder rooms, technical workshops, sponsor nights, and community events. The work is simple: bring the right people into the same room, then make the room useful.</span>
+                <span data-zh>2%Tech 从持续举办的创始人局、技术工作坊、赞助商之夜和社区活动开始。我们的工作很直接：把对的人带进同一个房间，并让这个现场真正有用。</span>
               </p>
             </div>
             <button class="page-down" type="button" data-expand-page="story" aria-label="Open Our Story details" onclick="window.expandPageFallback && window.expandPageFallback(this); return false;"></button>
@@ -4137,19 +4656,19 @@
               <div class="detail-lede">
                 <strong><span data-en>From rooms to network</span><span data-zh>从现场到网络</span></strong>
                 <div>
-                  <p><span data-en>The original 2%Tech site is about execution proof: rooms filled, partners hosted, founders connected, and repeatable operations around Luma, saved seats, and sponsor activation.</span><span data-zh>原官网核心是执行证明：把现场办满、服务合作方、连接创始人与技术人群，并围绕 Luma、预留席位和赞助露出形成可复用流程。</span></p>
+                  <p><span data-en>2%Tech creates founder rooms, builder workshops, sponsor nights, and community gatherings where the right people can actually meet, talk, and keep building after the event.</span><span data-zh>2%Tech 打造创始人局、Builder 工作坊、赞助合作夜和社区活动，让对的人真正见面、交流，并在活动后继续合作。</span></p>
                   <div class="detail-list">
-                    <span class="detail-pill">52+ Events</span>
-                    <span class="detail-pill">150K+ Network</span>
-                    <span class="detail-pill">Bay Area Rooms</span>
+                    <span class="detail-pill">Community Signal</span>
+                    <span class="detail-pill">Room Operations</span>
+                    <span class="detail-pill">Founder Network</span>
                   </div>
                 </div>
               </div>
               <div class="proof-strip reveal in">
-                <div class="proof-item"><b>Jan 2025</b><span data-en>Event operations began scaling around founder and builder rooms.</span><span data-zh>围绕创始人和 Builder 现场开始规模化活动执行。</span></div>
-                <div class="proof-item"><b>52+</b><span data-en>Events planned, promoted, hosted, and followed up.</span><span data-zh>完成策划、传播、主持与后续跟进的活动。</span></div>
-                <div class="proof-item"><b>150K+</b><span data-en>Reachable audience across founder, builder, and investor channels.</span><span data-zh>覆盖创始人、Builder 与投资人渠道的人群网络。</span></div>
-                <div class="proof-item"><b>3-5</b><span data-en>Monthly event rhythm for repeatable operations.</span><span data-zh>每月稳定活动节奏，形成可复用运营机制。</span></div>
+                <div class="proof-item"><b>01</b><span data-en>Find the room: venue, format, and reason for people to show up.</span><span data-zh>先定义现场：场地、活动形态，以及人们到场的理由。</span></div>
+                <div class="proof-item"><b>02</b><span data-en>Curate the list: founders, builders, sponsors, investors, and communities.</span><span data-zh>再设计名单：创始人、Builder、赞助商、投资人和社区。</span></div>
+                <div class="proof-item"><b>03</b><span data-en>Run the show: registration, agenda, speakers, promotion, and follow-up.</span><span data-zh>最后执行现场：报名、议程、嘉宾、传播和后续跟进。</span></div>
+                <div class="proof-item"><b>04</b><span data-en>Keep the network warm through recurring Bay Area rooms.</span><span data-zh>通过持续的湾区活动，让网络保持活跃。</span></div>
               </div>
             </div>
           </div>
@@ -4161,16 +4680,16 @@
               <div class="kicker"><span data-en>What we run</span><span data-zh>我们执行什么</span></div>
               <h2><span data-en>Planning, promotion, venue, people, follow-up.</span><span data-zh>策划、传播、场地、人群、后续合作。</span></h2>
               <p>
-                <span data-en>The website should show the actual work behind every event: who comes, where it happens, how it fills, and what partners get from it.</span>
-                <span data-zh>官网需要讲清楚每场活动背后的实际工作：谁会来、在哪里办、怎么做满、合作方能获得什么。</span>
+                <span data-en>From the room format to the guest list, 2%Tech handles the work that makes an event feel full, useful, and worth returning to.</span>
+                <span data-zh>从活动形态到到场名单，2%Tech 负责让一场活动真正坐满、有效，并值得再次参加。</span>
               </p>
             </div>
             <button class="page-down" type="button" data-expand-page="services" aria-label="Open What We Run details" onclick="window.expandPageFallback && window.expandPageFallback(this); return false;"></button>
             <div class="page-detail">
             <div class="detail-lede">
-              <strong><span data-en>What do you want to host?</span><span data-zh>你想办什么活动？</span></strong>
+              <strong><span data-en>Event formats to host</span><span data-zh>可主办的活动形式</span></strong>
               <div>
-                <p><span data-en>2%Tech supports the original site’s core event formats: summits, hackathons, demo days, technical workshops, after-parties, and private founder or investor rooms.</span><span data-zh>2%Tech 延续原官网的核心活动形态：峰会、黑客松、Demo Day、技术工作坊、After Party，以及面向创始人和投资人的闭门局。</span></p>
+                <p><span data-en>Host summits, hackathons, demo days, technical workshops, after-parties, and private founder or investor rooms with a team that understands Bay Area builders.</span><span data-zh>与熟悉湾区 Builder 网络的团队一起主办峰会、黑客松、Demo Day、技术工作坊、After Party，以及面向创始人和投资人的闭门局。</span></p>
                 <div class="detail-list">
                   <span class="detail-pill">Summit</span>
                   <span class="detail-pill">Hackathon</span>
@@ -4184,15 +4703,15 @@
             <div class="service-grid">
               <article class="service-card reveal delay-1">
                 <span class="card-orbit" aria-hidden="true"></span>
-                <small>52+ EVENTS</small>
-                <h3><span data-en>Proven since Jan 2025</span><span data-zh>2025 年以来已验证</span></h3>
-                <p><span data-en>52+ rooms planned, promoted, hosted, and followed up through the Bay Area network.</span><span data-zh>52+ 场活动已完成策划、传播、现场执行和后续跟进。</span></p>
+                <small>ROOM STRATEGY</small>
+                <h3><span data-en>Format design</span><span data-zh>活动形态设计</span></h3>
+                <p><span data-en>Pick the right room shape: workshop, salon, demo day, summit, after-party, or private founder session.</span><span data-zh>根据目标选择合适的活动形态：工作坊、沙龙、Demo Day、峰会、After Party 或闭门创始人局。</span></p>
               </article>
               <article class="service-card reveal delay-2">
                 <span class="card-orbit" aria-hidden="true"></span>
-                <small>150K+ NETWORK</small>
-                <h3><span data-en>Audience reach</span><span data-zh>人群触达</span></h3>
-                <p><span data-en>Founder, builder, investor, student hacker, and sponsor channels connected through recurring events.</span><span data-zh>通过持续活动连接创始人、Builder、投资人、学生黑客和赞助商渠道。</span></p>
+                <small>AUDIENCE CURATION</small>
+                <h3><span data-en>Guest list design</span><span data-zh>到场名单设计</span></h3>
+                <p><span data-en>Shape the invite list around founders, engineers, investors, partners, students, and technical communities.</span><span data-zh>围绕创始人、工程师、投资人、合作方、学生和技术社区设计邀请名单。</span></p>
               </article>
               <article class="service-card reveal delay-1">
                 <span class="card-orbit" aria-hidden="true"></span>
@@ -4216,7 +4735,7 @@
                 <span class="card-orbit" aria-hidden="true"></span>
                 <small>LUMA + CALENDAR</small>
                 <h3><span data-en>Calendar flow</span><span data-zh>活动日历</span></h3>
-                <p><span data-en>Luma pages, upcoming events, applications, and saved seats stay close to the main conversion path.</span><span data-zh>Luma、Upcoming Events、活动申请和预留席位都服务于清晰的合作转化路径。</span></p>
+                <p><span data-en>Event pages, applications, upcoming events, and partner seats stay organized around one clear path from interest to attendance.</span><span data-zh>活动页、报名申请、Upcoming Events 和合作方席位统一围绕从兴趣到到场的清晰路径组织。</span></p>
               </article>
             </div>
             </div>
@@ -4236,41 +4755,53 @@
             <button class="page-down" type="button" data-expand-page="audience" aria-label="Open audience details" onclick="window.expandPageFallback && window.expandPageFallback(this); return false;"></button>
             <div class="page-detail">
             <div class="detail-lede">
-              <strong><span data-en>Who shows up?</span><span data-zh>谁会来到现场？</span></strong>
+              <strong><span data-en>Who shows up</span><span data-zh>到场人群构成</span></strong>
               <div>
-                <p><span data-en>The original site’s value is the room itself: AI founders, builders, student hackers, infra teams, investors, sponsors, and technical communities gathered through the Bay Area network.</span><span data-zh>原官网真正的价值是“现场的人”：AI 创始人、Builder、学生黑客、基础设施团队、投资人、赞助商，以及湾区技术社区。</span></p>
+                <p><span data-en>The value is the room itself: AI founders, builders, student hackers, infra teams, investors, sponsors, and technical communities gathered through the Bay Area network.</span><span data-zh>真正的价值是“现场的人”：AI 创始人、Builder、学生黑客、基础设施团队、投资人、赞助商，以及湾区技术社区。</span></p>
               </div>
             </div>
-            <div class="audience-map reveal delay-2" aria-label="2%Tech audience network">
-              <div class="orbit-stage" aria-label="2%Tech room orbit">
-                <video class="orbit-bg-video" autoplay muted loop playsinline preload="auto">
-                  <source src="assets/orbit-dynamic-bg.mp4" type="video/mp4" />
-                </video>
-                <div class="orbit-core" aria-label="2%Tech">
-                  <img class="brand-logo-img" src="assets/2percenttech-official-cutout.png" alt="2%Tech" />
+            <div class="audience-map reveal delay-1" aria-label="2%Tech audience network">
+              <div class="room-blueprint" aria-label="Room partner and community map">
+                <div>
+                  <small><span data-en>Room partners</span><span data-zh>房间伙伴</span></small>
+                  <h3><span data-en>Trusted rooms, real partners.</span><span data-zh>真实现场，可信伙伴。</span></h3>
+                </div>
+                <div class="room-logo-wall" aria-label="Partner logo wall">
+                  <div class="room-logo"><span class="room-logo-mark is-aws"><img src="assets/partner-logos/aws.svg" alt="AWS" /></span><b>AWS Builder Loft</b><span class="room-logo-role">Venue / workshop room</span></div>
+                  <div class="room-logo"><span class="room-logo-mark"><img src="assets/partner-logos/frontier-tower.png" alt="Frontier Tower" /></span><b>Frontier Tower SF</b><span class="room-logo-role">Venue partner</span></div>
+                  <div class="room-logo"><span class="room-logo-mark is-finch"><img src="assets/partner-logos/finchtech.png" alt="FinchTech" /></span><b>FinchTech.AI</b><span class="room-logo-role">Community co-host</span></div>
+                  <div class="room-logo"><span class="room-logo-mark is-dark"><img src="assets/partner-logos/agi-house.png" alt="AGI House" /></span><b>AGI House</b><span class="room-logo-role">Founder room / venue</span></div>
+                </div>
+                <div class="room-entry-list" aria-label="Room entry paths">
+                  <div class="room-entry"><b><span data-en>Host</span><span data-zh>主办</span></b><span data-en>Venue, agenda, registration, speaker flow, and run of show.</span><span data-zh>场地、议程、报名、嘉宾流程和现场执行。</span></div>
+                  <div class="room-entry"><b><span data-en>Partner</span><span data-zh>合作</span></b><span data-en>Brand presence connected to a specific room and audience.</span><span data-zh>品牌露出绑定具体活动房间和到场人群。</span></div>
                 </div>
               </div>
-              <div class="brand-card-deck" aria-label="Original 2%Tech partner and sponsor cards">
-                <details class="card-deck-details">
-                  <summary class="deck-title"><span data-en>Co-host communities and venues</span><span data-zh>共办社区与场地</span></summary>
-                  <div class="brand-card-stack">
-                    <article class="brand-card" style="--r:-8deg; --y:0px; --open-r:-3deg; --open-y:0px"><span class="mark">AWS</span><b>AWS Builder Loft</b><span>Venue</span></article>
-                    <article class="brand-card" style="--r:0deg; --y:22px; --open-r:2deg; --open-y:76px"><span class="mark">SF</span><b>Frontier Tower SF</b><span>Venue</span></article>
-                    <article class="brand-card" style="--r:8deg; --y:44px; --open-r:-2deg; --open-y:152px"><span class="mark">FC</span><b>FinChip.AI</b><span>Community</span></article>
-                    <article class="brand-card" style="--r:-3deg; --y:0px; --open-r:2deg; --open-y:228px"><span class="mark">CB</span><b>Crewbase Collective</b><span>Community</span></article>
-                    <article class="brand-card" style="--r:3deg; --y:0px; --open-r:-2deg; --open-y:304px"><span class="mark">AI</span><b>AI House</b><span>Venue</span></article>
+              <div class="room-board" aria-label="2%Tech room composition">
+                <div class="room-board-panel">
+                  <small><span data-en>Room composition</span><span data-zh>现场构成</span></small>
+                  <h3><span data-en>Founder rooms, builder nights, partner stages.</span><span data-zh>创始人房间、Builder 夜、合作方舞台。</span></h3>
+                  <p>
+                    <span data-en>Recurring rooms bring AI founders, technical builders, student hackers, investors, sponsors, venues, and community partners into the same Bay Area network.</span>
+                    <span data-zh>持续举办的活动现场，把 AI 创始人、技术 Builder、学生黑客、投资人、赞助商、场地和社区伙伴带进同一个湾区网络。</span>
+                  </p>
+                  <div class="room-pill-grid" aria-label="Audience groups">
+                    <span class="is-primary">AI Founders</span>
+                    <span>Builders</span>
+                    <span>Student Hackers</span>
+                    <span>Investors</span>
+                    <span>Sponsors</span>
+                    <span>Infra Teams</span>
+                    <span>Venue Partners</span>
+                    <span>Community Hosts</span>
                   </div>
-                </details>
-                <details class="card-deck-details">
-                  <summary class="deck-title"><span data-en>Saved sponsor list</span><span data-zh>预留赞助名单</span></summary>
-                  <div class="brand-card-stack sponsor">
-                    <article class="brand-card is-sponsor" style="--r:-8deg; --y:0px; --open-r:-3deg; --open-y:0px"><span class="mark">Ali</span><b>Alibaba Cloud</b><span>Reserved</span></article>
-                    <article class="brand-card is-sponsor" style="--r:0deg; --y:22px; --open-r:2deg; --open-y:76px"><span class="mark">TRAE</span><b>TRAE · ByteDance</b><span>Reserved</span></article>
-                    <article class="brand-card is-sponsor" style="--r:8deg; --y:44px; --open-r:-2deg; --open-y:152px"><span class="mark">DS</span><b>DeepSeek</b><span>Reserved</span></article>
-                    <article class="brand-card is-sponsor" style="--r:-3deg; --y:0px; --open-r:2deg; --open-y:228px"><span class="mark">Kimi</span><b>Moonshot AI</b><span>Reserved</span></article>
-                    <article class="brand-card is-open" style="--r:3deg; --y:0px; --open-r:-2deg; --open-y:304px"><span class="mark">2%</span><b>Your Logo</b><span>Open seat</span></article>
-                  </div>
-                </details>
+                </div>
+                <div class="room-lanes" aria-label="Room formats">
+                  <div class="room-lane"><b><span data-en>Technical workshops</span><span data-zh>技术工作坊</span></b><span data-en>Hands-on sessions for AI tools, infra, and builder demos.</span><span data-zh>围绕 AI 工具、基础设施和 Builder demo 的实操型活动。</span></div>
+                  <div class="room-lane"><b><span data-en>Founder salons</span><span data-zh>创始人沙龙</span></b><span data-en>Smaller founder rooms designed for high-signal conversation.</span><span data-zh>更小规模的创始人房间，服务高密度交流。</span></div>
+                  <div class="room-lane"><b><span data-en>Sponsor nights</span><span data-zh>赞助合作夜</span></b><span data-en>Partner visibility tied to the guest list and follow-up path.</span><span data-zh>把合作方露出和到场名单、后续转化路径绑定。</span></div>
+                  <div class="room-lane"><b><span data-en>Community co-hosts</span><span data-zh>社区共办</span></b><span data-en>Shared rooms with venues, local communities, and platform partners.</span><span data-zh>与场地、本地社区和平台伙伴共办的活动空间。</span></div>
+                </div>
               </div>
             </div>
             </div>
@@ -4283,8 +4814,8 @@
               <div class="kicker"><span data-en>Gallery</span><span data-zh>活动现场图库</span></div>
               <h2><span data-en>Rooms in motion.</span><span data-zh>活动现场合集。</span></h2>
               <p>
-                <span data-en>The gallery is designed as an expandable archive, so every event can add a few highlights without breaking the page.</span>
-                <span data-zh>图库按照可扩展档案设计，每场活动都能追加精选照片，而不会把页面撑乱。</span>
+                <span data-en>Highlights from workshops, founder salons, sponsor nights, and builder rooms across the Bay Area.</span>
+                <span data-zh>来自湾区工作坊、创始人沙龙、赞助合作夜和 Builder 房间的现场精选。</span>
               </p>
             </div>
             <button class="page-down" type="button" data-expand-page="gallery" aria-label="Open gallery details" onclick="window.expandPageFallback && window.expandPageFallback(this); return false;"></button>
@@ -4292,11 +4823,11 @@
             <div class="detail-lede">
               <strong><span data-en>Event archive</span><span data-zh>活动照片归档</span></strong>
               <div>
-                <p><span data-en>Gallery is an expandable event archive, not a single static photo wall. Each event can keep a cover, highlights, and additional uploads while preserving the page structure.</span><span data-zh>Gallery 是可扩展的活动归档，不是单张照片墙。每场活动都可以保留封面、精选图和后续上传，同时不破坏页面结构。</span></p>
+                <p><span data-en>Browse recent rooms by event. Each collection captures the audience, venue, and partner presence that made the room work.</span><span data-zh>按活动浏览近期现场。每组照片记录到场人群、场地氛围和合作方露出的真实状态。</span></p>
                 <div class="detail-list">
                   <span class="detail-pill">Album Groups</span>
                   <span class="detail-pill">Event Covers</span>
-                  <span class="detail-pill">Add Photos</span>
+                  <span class="detail-pill">Room Highlights</span>
                 </div>
               </div>
             </div>
@@ -4304,7 +4835,7 @@
               <aside class="album-sidebar">
                 <div class="album-sidebar-head">
                   <strong>Albums</strong>
-                  <span><span data-en>Grouped by event, ready for more uploads.</span><span data-zh>按活动分组，后续继续添加。</span></span>
+                  <span><span data-en>Grouped by event and room format.</span><span data-zh>按活动和现场形式分组。</span></span>
                 </div>
                 <div class="album-list" data-album-list>
                   <button class="album-card is-active" type="button" data-album="builders">
@@ -4320,7 +4851,7 @@
                     <span><b>Partner Stage</b><small>Sponsor showcase · 2 photos</small><em>Open collection</em></span>
                   </button>
                 </div>
-                <button class="album-create" type="button">+ New Album</button>
+                <button class="album-create album-admin" type="button">+ New Album</button>
               </aside>
 
               <div class="album-board">
@@ -4329,7 +4860,7 @@
                     <strong data-album-title>AWS Builder Night</strong>
                     <span data-album-meta>Workshop · San Francisco · 5 photos</span>
                   </div>
-                  <label class="album-upload">
+                  <label class="album-upload album-admin">
                     Add Photos
                     <input type="file" accept="image/*" multiple data-photo-upload />
                   </label>
@@ -4354,8 +4885,8 @@
               <div class="kicker"><span data-en>Calendar and saved seats</span><span data-zh>活动日历与席位</span></div>
               <h2><span data-en>After the opening, people need a next step.</span><span data-zh>开场之后，需要明确下一步。</span></h2>
               <p>
-                <span data-en>The current site already has useful operational blocks: upcoming events, Luma links, event applications, and seats saved for partners.</span>
-                <span data-zh>原官网已有可用的运营模块：Upcoming Events、Luma 链接、活动申请和合作方预留席位。</span>
+                <span data-en>Upcoming events, recent rooms, applications, and partner seats give every visitor a clear next step.</span>
+                <span data-zh>Upcoming Events、近期活动、活动申请和合作方席位，让每位访客都有明确下一步。</span>
               </p>
             </div>
             <button class="page-down" type="button" data-expand-page="calendar" aria-label="Open event details" onclick="window.expandPageFallback && window.expandPageFallback(this); return false;"></button>
@@ -4363,7 +4894,7 @@
             <div class="detail-lede">
               <strong><span data-en>Upcoming and recent</span><span data-zh>即将举办与近期活动</span></strong>
               <div>
-                <p><span data-en>The original site’s operational flow stays here: upcoming events, Luma-style signups, recent events, applications, and seats saved for partners or sponsors.</span><span data-zh>原官网的运营路径放在这里：Upcoming Events、类似 Luma 的报名、Recent Events、活动申请，以及为合作方和赞助商预留的席位。</span></p>
+                <p><span data-en>Move from interest to attendance through event listings, Luma-style signups, applications, recent rooms, and seats reserved for partners or sponsors.</span><span data-zh>通过活动列表、类似 Luma 的报名、活动申请、近期活动和合作方预留席位，把兴趣转化为真实到场。</span></p>
                 <div class="detail-list">
                   <span class="detail-pill">Upcoming Events</span>
                   <span class="detail-pill">Recent Events</span>
@@ -4395,11 +4926,11 @@
         <section class="section sponsor page-view" id="sponsor" data-page="sponsor">
           <div class="inner">
             <div class="section-title page-intro reveal">
-              <div class="kicker"><span data-en>Interested?</span><span data-zh>合作咨询</span></div>
+              <div class="kicker"><span data-en>Partner</span><span data-zh>合作咨询</span></div>
               <h2><span data-en>Bring your next room to 2%Tech.</span><span data-zh>把下一场活动交给 2%Tech。</span></h2>
               <p>
-                <span data-en>Start with the partnership path, then open the details for contact, capabilities and sponsor fit.</span>
-                <span data-zh>先进入合作入口，再展开查看联系方式、执行能力和赞助适配方式。</span>
+                <span data-en>Host, sponsor, or co-create a room with the Bay Area founder and builder community.</span>
+                <span data-zh>与湾区创始人和 Builder 社区一起主办、赞助或共创一场活动。</span>
               </p>
             </div>
             <button class="page-down" type="button" data-expand-page="sponsor" aria-label="Open partnership details" onclick="window.expandPageFallback && window.expandPageFallback(this); return false;"></button>
@@ -4407,11 +4938,12 @@
             <div class="detail-lede">
               <strong><span data-en>Partner with us</span><span data-zh>成为合作方</span></strong>
               <div>
-                <p><span data-en>Keep the original sponsor path: tell 2%Tech what you want to host, who you want in the room, and whether you need venue, promotion, operations, or sponsor activation support.</span><span data-zh>保留原官网的合作路径：告诉 2%Tech 你想办什么、希望谁到场，以及是否需要场地、传播、执行或赞助露出支持。</span></p>
+                <p><span data-en>Tell 2%Tech what you want to host, who should be in the room, and whether you need venue, promotion, operations, or sponsor activation support.</span><span data-zh>告诉 2%Tech 你想办什么、希望谁到场，以及是否需要场地、传播、执行或赞助露出支持。</span></p>
                 <div class="detail-list">
-                  <span class="detail-pill">team@2percenttech.com</span>
-                  <span class="detail-pill">Sponsor Nights</span>
-                  <span class="detail-pill">Co-host Venues</span>
+                  <span class="detail-pill is-email">team2percenttech@hotmail.com</span>
+                  <span class="detail-pill">Host a Room</span>
+                  <span class="detail-pill">Sponsor a Night</span>
+                  <span class="detail-pill">Co-host Venue</span>
                 </div>
               </div>
             </div>
@@ -4424,7 +4956,7 @@
                   <span data-zh>赞助商、创业公司、基金和技术社区可以和 2%Tech 合作完成场地规划、人群邀约、现场执行和后续跟进。</span>
                 </p>
                 <div class="actions">
-                  <a class="btn primary" href="mailto:team@2percenttech.com"><span data-en>Talk Partnership</span><span data-zh>洽谈合作</span></a>
+                  <a class="btn primary" href="mailto:team2percenttech@hotmail.com"><span data-en>Talk Partnership</span><span data-zh>洽谈合作</span></a>
                   <a class="btn" href="#services" data-page-link="services"><span data-en>View Capabilities</span><span data-zh>查看能力</span></a>
                 </div>
               </div>
@@ -4510,8 +5042,10 @@
         window.expandPageFallback(button);
       }, true);
 
-      const initialHash = window.location.hash.replace("#", "");
-      showPage(pageHashMap[initialHash] || "about", false);
+      history.replaceState(null, "", "#top");
+      showPage("about", false);
+      const adminMode = new URLSearchParams(window.location.search).get("admin") === "1";
+      body.classList.toggle("admin-mode", adminMode);
 
       document.querySelectorAll(".brand-card-deck").forEach((deck) => {
         deck.querySelectorAll(".card-deck-details").forEach((panel) => {
@@ -4540,7 +5074,7 @@
           meta: "Workshop · San Francisco · 5 photos",
           photos: [
             { src: "assets/builder-room.png", caption: "Workshop density" },
-            { src: "assets/full-room.png", caption: "Full-room proof" },
+            { src: "assets/full-room.png", caption: "Full room" },
             { src: "assets/hack-table.png", caption: "Builder table" },
             { src: "assets/taku-screen.png", caption: "Partner screen" },
             { src: "assets/aws-workshop.png", caption: "Workshop floor" }
@@ -4551,7 +5085,7 @@
           meta: "Private session · 2 photos",
           photos: [
             { src: "assets/lounge-session.png", caption: "Salon setting" },
-            { src: "assets/full-room.png", caption: "Audience proof" }
+            { src: "assets/full-room.png", caption: "Audience view" }
           ]
         },
         stage: {
@@ -4606,14 +5140,16 @@
           albumStrip.appendChild(button);
         });
 
-        const emptySlots = Math.max(1, 5 - album.photos.length);
-        for (let i = 0; i < emptySlots; i += 1) {
-          const empty = document.createElement("button");
-          empty.className = "album-empty";
-          empty.type = "button";
-          empty.textContent = "+ Add photo";
-          empty.addEventListener("click", () => uploadInput?.click());
-          albumStrip.appendChild(empty);
+        if (adminMode) {
+          const emptySlots = Math.max(1, 5 - album.photos.length);
+          for (let i = 0; i < emptySlots; i += 1) {
+            const empty = document.createElement("button");
+            empty.className = "album-empty album-admin";
+            empty.type = "button";
+            empty.textContent = "+ Add photo";
+            empty.addEventListener("click", () => uploadInput?.click());
+            albumStrip.appendChild(empty);
+          }
         }
       }
 
@@ -4638,15 +5174,19 @@
 
       const introSequence = document.getElementById("introSequence");
       const introSky = document.getElementById("introSky");
+      let introDismissed = false;
+      function dismissIntro(targetPage = "about") {
+        if (introDismissed) return;
+        introDismissed = true;
+        introSequence?.classList.add("is-dismissed");
+        body.classList.remove("intro-active");
+        showPage(targetPage, targetPage !== "about");
+        setTimeout(() => {
+          introSequence?.remove();
+        }, 720);
+      }
       document.querySelectorAll("[data-enter-site]").forEach((button, index) => {
-        button.addEventListener("click", () => {
-          introSequence?.classList.add("is-dismissed");
-          body.classList.remove("intro-active");
-          setTimeout(() => {
-            introSequence?.remove();
-            if (index === 1) showPage("sponsor");
-          }, 720);
-        });
+        button.addEventListener("click", () => dismissIntro(index === 1 ? "sponsor" : "about"));
       });
 
       if (introSky) {
